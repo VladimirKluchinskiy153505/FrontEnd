@@ -1,0 +1,31 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+<h1>Trainers List</h1>
+{% for lesson in lesson_list %}
+<article>
+<b>Subject: {{lesson.subject_name}}</b><br>
+<b>StartTime: {{lesson.start_time}}</b><br>
+    <b>EndTime: {{lesson.end_time}}</b><br>
+    <b>Price: {{lesson.lesson_price}} $</b><br>
+    <b>Place: {{lesson.lesson_gym}}</b><br>
+    <b>Days:</b>
+    {% for day in lesson.get_days %}
+    <b>{{day}}</b>
+    {% endfor %}
+    {% if lesson.photo %}
+        <p><img class="img-article-left thumb" src="{{lesson.photo.url}}" style="width: 300px; height: 200px;"></p>
+    {% endif %}
+    </article><br>
+{% endfor %}
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+>>>>>>> c409acefaa41bf419e1d85ab94a429dc0c6cbc11

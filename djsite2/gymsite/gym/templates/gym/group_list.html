@@ -1,0 +1,17 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+<h1>GroupList</h1>
+{% for group in group_list %}
+<article>
+<b>Name: {{group.name}}</b><br>
+  <b>Schedule: {{group.schedule}}</b><br>
+  {% for client in group.get_clients %}
+  <b>{{client.name}}</b>
+  <b>{{client.get_gender}}</b>
+  <b>{{client.age}}</b>
+  <p><a href="{{ client.get_absolute_url }}">Подробная информация</a></p>
+  {% endfor %}
+
+    </article><br>
+{% endfor %}
+{% endblock%}

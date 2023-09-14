@@ -1,0 +1,46 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+<header><h2 align="center">Main Info</h2></header>
+<div align="justify">
+    <h3>Last Updated Article:</h3>
+<details>
+    <summary>{{last_article.name}}</summary>
+    <article>{{last_article.content }}</article>
+</details>
+    </div>
+<div align="center">
+    <h3>Advertisement</h3>
+    <a href="https://store.epicgames.com/ru/" target="_blank" >
+    <img src="/static/images/hogwarts_legacy.jpg" alt="Game Of The Year" width="640" height="360" title="Click to enlarge">
+    </a>
+</div>
+<div align="center">
+    <h3>Partners:</h3>
+    <ol>
+        <li >
+            <a href="https://www.nvidia.com/ru-ru/" target="_blank">
+                <img src="/static/images/logos/nvidia.jpg" align="left" width="100" height="50" alt="nvidia">
+                <p>Nvidia</p>
+            </a>
+        </li>
+        <li >
+            <a href="https://www.amd.com/en.html" target="_blank">
+                <img src="/static/images/logos/amd.jpg" align="left" width="100" height="50" alt="nvidia">
+                <p>AMD</p>
+            </a>
+        </li>
+        <li >
+            <a href="https://www.asus.com/ru/" target="_blank">
+                <img src="/static/images/logos/asus.png" align="left" width="100" height="50" alt="nvidia">
+                <p>ASUS</p>
+            </a>
+        </li>
+        <li >
+            <a href="https://www.gigabyte.com/" target="_blank">
+                <img src="/static/images/logos/gigabyte.jpg" align="left" width="100" height="50" alt="nvidia">
+                <p>Gigabyte</p>
+            </a>
+        </li>
+    </ol>
+</div>
+{% endblock %}

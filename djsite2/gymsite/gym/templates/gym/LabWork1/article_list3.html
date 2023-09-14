@@ -1,0 +1,17 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+<h1 align="center">Articles:</h1>
+<hr>
+{% for article in article_list %}
+<article>
+<h1>Name: {{article.name}}</h1>
+
+  <b>{{ article.timestamp|date:"F d, Y H:i" }}</b>
+    <details>
+        <summary>{{article.get_first_sentence}}</summary>
+        <p>{{article.content}}</p>
+    </details>
+    <hr>
+</article>
+{% endfor %}
+{% endblock%}

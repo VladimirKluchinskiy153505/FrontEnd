@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+       <thead>
+            <tr>
+                <th>Header 1</th><th>Header 2</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td>Footer 1</td><td>Footer 2</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td> Row 1, Cell 1</td><td> Row 1, Cell 2</td>
+            </tr>
+            <tr>
+                <td> Row 2, Cell 1</td><td> Row 2, Cell 2</td>
+            </tr>
+        </tbody>
+</table>
+<form action="http://example.com/app/profile.php" method="post" novalidate autocomplete="on">
+  Имя:
+  <input type="text" name="username"><br>
+  Адрес эл. почты:
+  <input type="text" name="email"><br>
+  Пол:<br>
+  <input type="radio" name="sex" value="male">мужской<br>
+  <input type="radio" name="sex" value="female">женский<br>
+
+  <input type="submit" value="Отправить">
+  <input type="reset" value="Очистить">
+</form>
+<form action="http://server.com" method="post">
+  <input type="checkbox" name="vehicle"
+         value="Bike"> I have a bike<br>
+  <input type="checkbox" name="vehicle"
+         value="Car"> I have a car<br><br>
+  <input type="radio" name="gender" value="male">
+         Male<br>
+  <input type="radio" name="gender" value="female">
+         Female
+</form>
+<form action="http://server.com" method="post">
+<!-- <select size="4" name="s1">-->
+<!--   <option disabled>Choose a hero:</option>-->
+<!--   <option value="iron">Iron Man</option>-->
+<!--   <option selected value="captain">Captain America</option>-->
+<!--   <option value="thor">Thor</option>-->
+<!-- </select>-->
+<!-- <br>-->
+ <select size="1" name="s2">
+   <option disabled>Choose a hero:</option>
+   <option value="iron">Iron Man</option>
+   <option selected value="captain">Captain America</option>
+   <option value="thor">Thor</option>
+ </select>
+ <br>
+ <input type="submit" value="Send!">
+</form>
+
+<select size="7" name="list">
+  <option value="v1">Not in group</option>
+  <optgroup label="Group 1">
+    <option value="v2">Item G1-1</option>
+    <option value="v3">Item G1-2</option>
+  </optgroup>
+  <optgroup label="Group 2">
+    <option value="v4">Item G2-1</option>
+    <option value="v5">Item G2-2</option>
+  </optgroup>
+</select>
+<datalist id="7">
+  <option value="Oranges">Refreshing Oranges</option>
+    <option value="Cherries">smth </option>
+</datalist>
+ <form action="http://server.com" method="post">
+    <button type="button" name="btn">
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </button>
+</form>
+<form action="http://server.com" method="post">
+    <fieldset title="Login info">
+      <legend>User info</legend>
+      User: <input type="text" name="usr"><br>
+      Pass: <input type="password" name="pass">
+      <br>
+      <input type="submit" value="Login">
+    </fieldset>
+</form>
+<form action="http://server.com" method="post">
+  <fieldset title="Login info">
+    <legend>User info</legend>
+    <label for="usr">User:</label>
+    <input id="usr" type="text" name="usr"><br>
+    <label>Pass:
+      <input type="password" name="pass">
+    </label><br>
+    <input type="submit" value="Login">
+  </fieldset>
+</form>
+<em>I</em> like <b>apples</b> and <b>oranges</b>.
+  My favorite kind of orange is the mandarin,
+  properly known as <i>citrus reticulata</i>.
+  Oranges at my local store cost
+  <s>$1 each</s> $2 for 3 <small>(plus tax)</small>.
+
+  <strong>Warning:</strong> Eating <u>too many</u> oranges
+  can give you heart burn.
+
+  The point x<sub>10</sub> is the 10<sup>th</sup> point.
+<p>
+    <code>
+      var fruits = ["apples", "oranges", "mangoes", "cherries"];<br>
+      document.writeln("I like " + fruits.length + " fruits");
+    </code>
+  </p>
+  <p>The variable in this example is <var>fruits</var></p>
+  <p>The output from the code is: <samp>I like 4 fruits</samp></p>
+  <p>When prompted for my favorite fruit, I typed: <kbd>cherries</kbd>
+I would like a <mark>pair</mark> of <mark>pears</mark>
+<p dir="rtl">Тест атрибута dir. שבת -суббота!</p>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+    <h1>Lesson List</h1>
+    <form method="get" action="">
+        <label for="subject_name">Subject Name:</label>
+        <select name="subject_name" id="subject_name">
+            <option value="">All</option>
+            {% for choice in subject_name_choices %}
+                <option value="{{ choice }}">{{ choice }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="lesson_price_higher">Lesson Price (Higher):</label>
+        <input type="number" name="lesson_price_higher" id="lesson_price_higher">
+
+        <label for="lesson_price_lower">Lesson Price (Lower):</label>
+        <input type="number" name="lesson_price_lower" id="lesson_price_lower">
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Photo</th>
+            <th>Subject Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Days</th>
+            <th>MastersList</th>
+            <th>Lesson Price</th>
+        </tr>
+        {% for lesson in lessons %}
+        <tr>
+            <td> {% if lesson.photo %}
+				<p><img class="img-article-left thumb" src="{{lesson.photo.url}}" style="width: 300px; height: 200px;"></p>
+				{% endif %}</td>
+            <td>{{ lesson.get_subject_name }}</td>
+            <td>{{ lesson.start_time }}</td>
+            <td>{{ lesson.end_time }}</td>
+            <td>Days: {% for day in lesson.get_days %}
+                {{day}}
+                {% endfor %}
+            </td>
+            <td>Teachers: {% for master in lesson.get_related_masters %}
+                {{master}}
+            {% endfor %}</td>
+            <td>Price {{ lesson.lesson_price }}$</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock %}

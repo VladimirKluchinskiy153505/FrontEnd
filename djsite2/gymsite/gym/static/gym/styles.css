@@ -1,0 +1,43 @@
+footer {
+ text-align: center;
+}
+li {
+  padding: 10px;
+  background-color: #15e6a3;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+li:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: #EE0CA2;
+}
+.button {
+  display: inline-block;
+  padding:0px 0px;
+  background-color: #51133C;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 1px;
+}
+
+.button:hover {
+  background-color: #23527c;
+}
+.left-margin {
+            margin-left: 100px; /* Установите желаемый отступ (например, 20 пикселей) */
+}
+.middle{
+  text-align: center;}

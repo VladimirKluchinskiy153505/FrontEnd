@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<h1>MasterDetails</h1>
+<table>
+    <tr>
+        <th>master_name</th>
+        <th>subject_name</th>
+        <th>email</th>
+    </tr>
+    {% for master in masters %}
+    <tr>
+        <td>{{master.username}}</td>
+        <td>{{master.subject_name}}</td>
+        <td>{{master.email}}</td>
+    </tr>
+    {% endfor %}
+</table>-->
+{% for master in masters %}
+<article>
+<b>Name: {{master.username}}</b><br>
+<b>Subject: {{master.subject_name}}</b><br>
+    <b>PhoneNumber: {{master.phone_number}}</b><br>
+<b>Email: {{master.email}}</b><br>
+    <b>Photo:</b><br>
+    {% if master.photo %}
+        <p><img class="img-article-left thumb" src="{{master.photo.url}}" style="width: 300px; height: 200px;"></p>
+    {% endif %}
+<b>Email: {{master.email}}</b>
+    </article><br>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+<!--<h1>Performance Statistics</h1>-->
+<!--<p>Average clients age: {{average_client_age}}</p>-->
+<!--<p>Most expensive lesson: {{most_expensive_lesson.get_subject_name}}</p>-->
+<!--<p>The cheapest lesson: {{the_cheapest_lesson.get_subject_name}}</p>-->
+<!--<p>The most popular lesson: {{most_popular_subject}} with {{max_students_count}} students</p>-->
+<!--<p>The most profitable subject: {{most_profitable_subject}} with {{max_weekly_profit}} $ in a week</p>-->
+<table>
+    <caption><h3><b>Performance Statistics</b></h3></caption>
+    <colgroup>
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+    </colgroup>
+    <tr>
+        <th>Average clients age:</th>
+        <th>Most expensive lesson:</th>
+        <th>The cheapest lesson:</th>
+        <th>The most popular lesson:</th>
+        <th>The most profitable subject:</th>
+    </tr>
+    <tr>
+        <td>{{average_client_age}}</td>
+        <td>{{most_expensive_lesson.get_subject_name}}</td>
+        <td>{{the_cheapest_lesson.get_subject_name}}</td>
+        <td>{{most_popular_subject}} with {{max_students_count}} students</td>
+        <td>{{most_profitable_subject}} with {{max_weekly_profit}} $ in a week</td>
+    </tr>
+</table>
+<ul>
+<li><a href="{% url 'lesson_list' %}">Список Занятий</a></li>
+<li><a href="{% url 'master_list' %}">Список Тренеров</a></li>
+<li><a href="{% url 'card_list' %}">Виды клубных карт</a></li>
+<li><a href="{% url 'article_list' %}">Интересные статьи</a></li>
+<li><a href="{% url 'explanation_dictionary_page' %}">Список часто задаваемых вопросов</a></li>
+<li><a href="{% url 'privacy_policy' %}">Политика конфиденциальности</a></li>
+<li><a href="{% url 'vacancies' %}">Список Вакансий</a></li>
+<li><a href="{% url 'review_list' %}">Список Отзывов</a></li>
+<li><a href="{% url 'review_form' %}">Оставить Отзыв</a></li>
+    <li><a href="{% url 'test_page' %}">Test Page</a></li>
+    </ul>
+<!--<li><a href="{% url 'api_test' %}">ApiTest</a></li>-->
+{% if mastername %}
+<b>Only for master:</b>
+<ul>
+<li><a href="{% url 'clients' %}">Список всех клиентов</a></li>
+<li><a href="{% url 'master_lessons' username=mastername %}">Список Занятий для тренера {{mastername}}</a></li>
+<li><a href="{% url 'master_students' username=mastername %}">Список индивидуальных учеников для {{mastername}}</a></li>
+<li><a href="{% url 'groups' %}">Список всех групп</a></li>
+</ul>
+{% endif %}
+<h1>Trainers List</h1>
+{% for master in masters %}
+<article>
+<b>Name: {{master.username}}</b><br>
+<b>Subject: {{master.get_subject_name}}</b><br>
+<b>Email: {{master.email}}</b>
+    {% if master.photo %}
+				<p><img class="img-article-left thumb" src="{{master.photo.url}}" style="width: 300px; height: 200px;"></p>
+				{% endif %}
+    </article><br>
+{% endfor %}
+<h1>Ask a question</h1>
+
+    <form method="post" action="{% url 'submit_question' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Question</button>
+    </form>
+{% endblock %}

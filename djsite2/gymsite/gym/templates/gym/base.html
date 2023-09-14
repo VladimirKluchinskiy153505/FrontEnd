@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
+    <script>
+        function displayTimezone() {
+            var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById("timezone").innerHTML = "Current Timezone: " + timezone;
+        }
+        function displayDate() {
+            var currentDate = new Date();
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var formattedDate = currentDate.toLocaleDateString(undefined, options);
+            document.getElementById("date").innerHTML = "Current Date: " + formattedDate;
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="Legendary Gym" content="Gym, Fitness club, Healthy way of life">
+    <title>TopGym</title>
+   <link rel="stylesheet" type="text/css" href="{% static 'gym/styles.css' %}">
+
+</head>
+<body onload="displayTimezone(); displayDate()">
+<div class="sidebar">
+    <nav>
+    <a href="{% url 'registration' %}" class="button">Регистрация</a> | <a href="{% url 'login' %}" class="button">Войти</a>
+    <a href="{% url 'logout' %}" class="button">Выход</a>
+    <a href="{% url 'home' %}" class ="button">Home</a>
+    <b id="timezone"></b>
+    <b id="date"></b>
+    <a href="{% url 'about'%}" class="button">About</a>
+    <a href="{% url 'main_news'%}" class="button">Main Info</a>
+        </nav>
+</div>
+    <br>
+{% block content %}
+{% endblock %}
+<!--<h1>Hello World!</h1>
+<li class="last"><a href="{% url 'lesson_list' %}">Список Занятий</a></li>
+<li class="last"><a href="{% url 'master_list' %}">Список Тренеров</a></li>
+<h1>Trainers List</h1>
+{% for master in masters %}
+<article>
+<b>Name: {{master.username}}</b><br>
+<b>Subject: {{master.subject_name}}</b><br>
+<b>Email: {{master.email}}</b>
+    {% if master.photo %}
+				<p><img class="img-article-left thumb" src="{{master.photo.url}}" style="width: 300px; height: 200px;"></p>
+				{% endif %}
+    </article><br>
+{% endfor %}-->
+<footer>All rights reserved 2023</footer>
+</body>
+</html>

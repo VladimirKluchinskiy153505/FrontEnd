@@ -1,0 +1,13 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+<h1>review_list</h1>
+{% for review in review_list %}
+<div class="review">
+            <b>Name: {{ review.name }}</b>
+            <p>Оценка: <span class="score">{{ review.score }}</span></p>
+            <p>Отзыв: {{ review.text }}</p>
+            <p>Дата: {{ review.timestamp|date:"F d, Y H:i" }}</p>
+        </div>
+<hr>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+<h1>Список вакансий</h1>
+{% for vacancy in vacancy_list %}
+<ul>
+    <li>
+        <h2>{{vacancy.subject_name}}</h2>
+    </li>
+</ul>
+{% endfor %}
+{% endblock %}

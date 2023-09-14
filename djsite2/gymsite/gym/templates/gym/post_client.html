@@ -1,0 +1,14 @@
+{% extends 'gym/base.html' %}
+{% block content %}
+<h1>Client Info</h1>
+<article>
+<b>Name: {{client.name}}</b><br>
+<b>Gender: {{client.get_gender}}</b><br>
+  <b>Card: {{client.card}}</b><br>
+  <b>Итоговая стоимость {{client.get_final_cost}}$</b><br>
+  <b>Photo:</b><br>
+    {% if client.photo %}
+        <p><img class="img-article-left thumb" src="{{client.photo.url}}" style="width: 300px; height: 200px;"></p>
+    {% endif %}
+    </article><br>
+{% endblock %}

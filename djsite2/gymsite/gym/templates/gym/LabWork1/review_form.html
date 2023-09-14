@@ -1,0 +1,20 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Отправить отзыв</title>-->
+<!--</head>-->
+<!--<body>-->
+{% extends 'gym/base.html' %}
+{% block content %}
+<div>
+<h1>Make Review</h1>
+    <form method="post"  >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
+<!--</body>-->
+<!--</html>-->
