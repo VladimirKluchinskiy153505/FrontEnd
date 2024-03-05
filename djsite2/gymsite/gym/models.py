@@ -1,42 +1,52 @@
-
 import os
-
 import openai
 import requests
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-
 from gymsite import settings
 from django.db import models
 from django.contrib.auth.models import User
 from gym.constants import *
+# class Banner(models.Model):
+#     rotation_interval = models.IntegerField(default=2000)
+#     def save(self, *args, **kwargs):
+#         existing_objects = Banner.objects.exists()
+#         if existing_objects:
+#             return
+#         super().save(*args, **kwargs)
 class Review(models.Model):
-    name = models.CharField(max_length=50,unique=True, verbose_name='Name')
+    name = models.CharField(max_length=50, unique=True, verbose_name='Name')
     score = models.IntegerField(
         validators=[
             MinValueValidator(0, message='Оценка не может быть отрицательной'),
             MaxValueValidator(10, message ='Оценка не может быть больше 10')
         ]
     )
-    text = models.TextField(max_length=1000)
+    content = models.TextField(max_length=1000, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name='DataTime')
 
     class Meta:
         ordering = ['timestamp']
 class Vacancy(models.Model):
     subject_name = models.CharField(max_length=20, choices=LessonChoice, default='NoneSubject',verbose_name='SubjectName')
+    content = models.TextField(max_length=10000, null=True)
+    image = models.ImageField(upload_to="photos/vacancy_labels", null=True)
+    salary = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    def get_subject_name(self):
+        return dict(LessonChoice)[str(self.subject_name)]
 class Question(models.Model):
     name = models.CharField(max_length=50, verbose_name='Name')
     email = models.EmailField()
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name='DataTime')
     question = models.TextField(max_length=500, verbose_name='QuestionContent')
-    answer = models.TextField(max_length=3000,null=True, verbose_name='QuestionAnswer')
+    answer = models.TextField(max_length=300, null=True, verbose_name='QuestionAnswer')
     class Meta:
         ordering = ['timestamp']
+
 class Article(models.Model):
-    name = models.CharField(max_length=50, verbose_name='ArticleName')
+    name = models.CharField(max_length=100, verbose_name='ArticleName')
     content = models.TextField(max_length=10000)
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name='DataTime', null=True)
     def __str__(self):
@@ -60,45 +70,45 @@ class ClubCard(models.Model):
         return dict(CardNameChoice)[str(self.name)]
     def get_discount(self):
         return dict(CardDiscountChoice)[self.discount]
-
+    def get_name(self):
+        return dict(CardNameChoice)[self.name]
     class Meta:
         ordering = ['discount']
 class Client(models.Model):
     name = models.CharField(max_length=50, verbose_name='ClientName')
     gender = models.CharField(max_length=1, choices=GenderChoice)
-    age = models.IntegerField(max_length=3, default=0)
+    age = models.IntegerField(default=0)
     photo = models.ImageField(upload_to="photos/clients", verbose_name='Photo',blank=True, null=True)
     card = models.ForeignKey('ClubCard', on_delete=models.PROTECT,null=True, blank=True,default=None, verbose_name='DiscountCard')
-    def save(self, *args, **kwargs):
-        if not self.photo:
-            openai.api_key = OPENAI_API_KEY
-
-            response = openai.Image.create(
-                prompt=f"a beautiful face of human with name:{self.name}, gender:{self.gender}, age{self.age}",
-                n=1,
-                size="1024x1024"
-            )
-            if 'data' in response and len(response['data']) > 0:
-                chosen_photo = response['data'][0]
-                photo_url = chosen_photo['url']
-
-                # Download and save the image to the media folder
-                photo_name = f"{self.name}_photo.jpg"
-                photo_path = os.path.join(settings.MEDIA_ROOT, 'photos/clients', photo_name)
-
-                response = requests.get(photo_url)
-                response.raise_for_status()
-
-                with open(photo_path, 'wb') as file:
-                    file.write(response.content)
-
-                # Save the path to the photo in the model field
-                self.photo = os.path.join('photos/clients', photo_name)
-            else:
-                # Error handling for OpenAI API request failure
-                raise ValueError('Failed to choose client photo')
-
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.photo:
+    #         openai.api_key = OPENAI_API_KEY
+    #         response = openai.Image.create(
+    #             prompt=f"a beautiful face of human with name:{self.name}, gender:{self.gender}, age{self.age}",
+    #             n=1,
+    #             size="1024x1024"
+    #         )
+    #         if 'data' in response and len(response['data']) > 0:
+    #             chosen_photo = response['data'][0]
+    #             photo_url = chosen_photo['url']
+    #
+    #             # Download and save the image to the media folder
+    #             photo_name = f"{self.name}_photo.jpg"
+    #             photo_path = os.path.join(settings.MEDIA_ROOT, 'photos/clients', photo_name)
+    #
+    #             response = requests.get(photo_url)
+    #             response.raise_for_status()
+    #
+    #             with open(photo_path, 'wb') as file:
+    #                 file.write(response.content)
+    #
+    #             # Save the path to the photo in the model field
+    #             self.photo = os.path.join('photos/clients', photo_name)
+    #         else:
+    #             # Error handling for OpenAI API request failure
+    #             raise ValueError('Failed to choose client photo')
+    #
+    #     super().save(*args, **kwargs)
     def __str__(self):
         return self.name
     def get_gender(self):
@@ -192,42 +202,43 @@ class Master(models.Model):
     username = models.CharField(max_length=50,unique=True,default='NoneMaster', verbose_name='MasterName')
     subject_name = models.CharField(max_length=20, choices=LessonChoice,default='NoneSubject', verbose_name='SubjectName')
     password = models.CharField(max_length=100, default='***')
-    phone_number = models.CharField(max_length=20, blank=True)
+    phone_number = models.CharField(max_length=20, blank=False)
     email = models.EmailField(blank=True)
     photo = models.ImageField(upload_to="photos/masters", verbose_name='Photo', default=None,blank=True)
     individual_class_price = models.IntegerField(default=10)
     individual_students = models.ManyToManyField('Client', blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    def save(self, *args, **kwargs):
-        print('.........save called')
-        if not self.photo:
-            openai.api_key = OPENAI_API_KEY
-            response = openai.Image.create(
-                prompt=f"a picture of {self.get_subject_name()} trainer with name:{self.username}",
-                n=1,
-                size="1024x1024"
-            )
-            if 'data' in response and len(response['data']) > 0:
-                chosen_photo = response['data'][0]
-                photo_url = chosen_photo['url']
+    #def save(self, *args, **kwargs):
+    #    print('.........save called')
 
-                # Download and save the image to the media folder
-                photo_name = f"{self.username}_photo.jpg"
-                photo_path = os.path.join(settings.MEDIA_ROOT, 'photos/masters', photo_name)
-
-                response = requests.get(photo_url)
-                response.raise_for_status()
-
-                with open(photo_path, 'wb') as file:
-                    file.write(response.content)
-
-                # Save the path to the photo in the model field
-                self.photo = os.path.join('photos/masters', photo_name)
-            else:
-                # Error handling for OpenAI API request failure
-                raise ValueError('Failed to choose client photo')
-
-        super().save(*args, **kwargs)
+    #     if not self.photo:
+    #         openai.api_key = OPENAI_API_KEY
+    #         response = openai.Image.create(
+    #             prompt=f"a picture of {self.get_subject_name()} trainer with name:{self.username}",
+    #             n=1,
+    #             size="1024x1024"
+    #         )
+    #         if 'data' in response and len(response['data']) > 0:
+    #             chosen_photo = response['data'][0]
+    #             photo_url = chosen_photo['url']
+    #
+    #             # Download and save the image to the media folder
+    #             photo_name = f"{self.username}_photo.jpg"
+    #             photo_path = os.path.join(settings.MEDIA_ROOT, 'photos/masters', photo_name)
+    #
+    #             response = requests.get(photo_url)
+    #             response.raise_for_status()
+    #
+    #             with open(photo_path, 'wb') as file:
+    #                 file.write(response.content)
+    #
+    #             # Save the path to the photo in the model field
+    #             self.photo = os.path.join('photos/masters', photo_name)
+    #         else:
+    #             # Error handling for OpenAI API request failure
+    #             raise ValueError('Failed to choose client photo')
+    #
+    #    super().save(*args, **kwargs)
     def __str__(self):
         return self.username
     def get_subject_name(self):

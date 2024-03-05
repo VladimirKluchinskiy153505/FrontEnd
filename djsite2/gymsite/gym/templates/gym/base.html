@@ -18,22 +18,51 @@
     <meta charset="UTF-8">
     <meta name="Legendary Gym" content="Gym, Fitness club, Healthy way of life">
     <title>TopGym</title>
-   <link rel="stylesheet" type="text/css" href="{% static 'gym/styles.css' %}">
-
+   <link rel="stylesheet" type="text/css" href="{% static 'gym/css/styles.css' %}">
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background-color: #EE0CA2;
+            margin-bottom: 20px;
+            }
+        body {
+            background-color: #DFD9E4; /* Белый цвет */
+            }
+        @media (min-width: 768px) {
+        body {
+            font-size: 18px;
+            }
+        }
+    </style>
+    <script src="{% static 'gym/js/7date.js' %}"></script>
+    <script src="{% static 'gym/js/5font_color_change.js' %}" defer></script>
 </head>
 <body onload="displayTimezone(); displayDate()">
-<div class="sidebar">
-    <nav>
+    <nav class="sidebar">
     <a href="{% url 'registration' %}" class="button">Регистрация</a> | <a href="{% url 'login' %}" class="button">Войти</a>
-    <a href="{% url 'logout' %}" class="button">Выход</a>
+    <a href="{% url 'logout' %}" class="button" onclick="resetScriptShown()">Выход</a>
     <a href="{% url 'home' %}" class ="button">Home</a>
     <b id="timezone"></b>
     <b id="date"></b>
     <a href="{% url 'about'%}" class="button">About</a>
     <a href="{% url 'main_news'%}" class="button">Main Info</a>
-        </nav>
-</div>
-    <br>
+        <label>Изменить стиль</label>
+    <input type="checkbox" id="styleCheckbox">
+<form id="styleForm" style="display: none;">
+    <label for="fontSize">Размер шрифта:</label>
+    <input type="range" id="fontSize" min="10" max="50" step="1" value="16">
+    <label for="textColor">Цвет текста:</label>
+    <input type="color" id="textColor" value="#000000">
+    <label for="bgColor">Цвет фона:</label>
+    <input type="color" id="bgColor" value="#ffffff">
+    <button id="reset-color-btn">Reset</button>
+</form>
+    </nav>
+    <br><br>
 {% block content %}
 {% endblock %}
 <!--<h1>Hello World!</h1>

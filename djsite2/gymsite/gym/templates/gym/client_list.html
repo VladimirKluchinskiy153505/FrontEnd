@@ -1,6 +1,18 @@
 {% extends 'gym/base.html' %}
+{% load static %}
 {% block content %}
+<style>
+    .catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Создаем автоматическую сетку с минимальной шириной 250px и равными колонками */
+  grid-gap: 20px; /* Промежуток между элементами */
+}
+</style>
+<script src="{% static 'gym/js/6clients_data.js' %}" defer></script>
 <h1>Clients</h1>
+<div id="resultContainer"></div>
+<div id="male_statistics"></div>
+<div id="female_statistics"></div>
 <form method="get" action="">
         <label for="client_age_higher">Client Age (Higher):</label>
         <input type="number" name="client_age_higher" id="client_age_higher">
@@ -12,6 +24,7 @@
         <input type="text" name="client_name" id="client_name">
         <button type="submit">Filter</button>
 </form>
+<div class="catalog">
 {% for client in clients %}
 <article>
 <b>Name: {{client.name}}</b><br>
@@ -25,4 +38,5 @@
     {% endif %}
     </article><br>
 {% endfor %}
+</div>
 {% endblock %}

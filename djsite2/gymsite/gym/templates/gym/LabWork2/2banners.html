@@ -1,0 +1,43 @@
+{% extends 'gym/base.html' %}
+{% load static %}
+{% block content %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+ var savedValue = localStorage.getItem("savedInputValue");
+        if (savedValue) {
+        //alert(savedValue);
+            document.getElementById("adminInput").value = savedValue;
+        }
+});
+function saveAndReload() {
+        var inputValue = document.getElementById("adminInput").value;
+        localStorage.setItem("savedInputValue", inputValue);
+        location.reload();
+    }
+</script>
+<!--window.onload = function() {-->
+<!--        var savedValue = localStorage.getItem("savedInputValue");-->
+<!--        if (savedValue) {-->
+<!--        alert(savedValue);-->
+<!--            document.getElementById("adminInput").value = savedValue;-->
+<!--        }-->
+<!--    };-->
+<div id="banner1-container">
+    <a href="#" id="banner1-link" target="_blank">
+        <img id="banner1-image" src="#" alt="Banner">
+    </a>
+</div>
+<div id="banner2-container">
+    <a href="#" id="banner2-link" target="_blank">
+        <img id="banner2-image" src="#" alt="Banner">
+    </a>
+</div>
+{% if user.is_superuser %}
+    <label for="adminInput">Admin Input:</label>
+    <input type="text" id="adminInput" name="adminInput" value="2000">
+    <input type="submit" value="Send" onclick="saveAndReload()"/>
+{% else %}
+<input type="text" id="adminInput" name="adminInput" value="1200" hidden="hidden">
+{% endif %}
+<script src="{% static 'gym/js/2banner_rotation.js' %}"></script>
+{% endblock  %}

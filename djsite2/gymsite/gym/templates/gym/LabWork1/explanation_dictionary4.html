@@ -1,22 +1,50 @@
 {% extends 'gym/base.html' %}
 {% block content %}
+<style>
+    .question{
+    font-size: 22px; /* Размер шрифта реквизитов */
+  color: #F0031A; /* Цвет текста реквизитов */
+  margin: 15px; /* Отступ снизу */
+    }
+  .answer{
+    font-size: 18px; /* Размер шрифта реквизитов */
+    color: #134E11; /* Цвет текста реквизитов */
+    margin: 10px; /* Отступ снизу */
+    }
+    .faq-item {
+  margin-bottom: 20px; /* Расстояние между вопросами */
+}
+  .faq-header {
+  background-color: #10ECC0; /* Цвет фона заголовка (данные о вопросе) */
+  padding: 10px;
+}
+  b{
+  font-size: 20px;
+  }
+   span{
+  font-size: 20px;
+  }
+</style>
 <h1 align="center">Questions:</h1>
 <hr>
 {% for question in question_list %}
     {% if question.answer %}
+<div class="faq-item">
+<div class="faq-header">
 <b>Name: </b><span> {{question.name}}</span>
 <br>
 <b>Email: </b><span>{{question.email}}</span>
 <br>
 <b>Time: </b><span>{{question.timestamp}}</span>
-<br>
+</div>
 <!--<b>Question: </b><span>{{question.question}}</span>-->
 <!--<br>-->
 <!--<b>Answer:</b><span>{{question.answer}}</span>-->
 <details>
-    <summary><b>Question: </b><span>{{question.question}}</span></summary>
-    <b>Answer:</b><span>{{question.answer}}</span>
+    <summary class="question"><b>Question: </b><span>{{question.question}}</span></summary>
+    <b>Answer:</b><span class="answer">{{question.answer}}</span>
 </details>
+    </div>
 <hr>
     {% endif %}
 {% endfor %}

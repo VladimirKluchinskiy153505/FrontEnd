@@ -5,19 +5,37 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.urls import reverse
 from django.db.models import Max, Min
 import requests
 
 from gym.forms import RegistrationForm, LoginForm, QuestionForm, ReviewForm
 from gym.models import Master, Lesson, ClubCard, Client, Group, Article, Question, Vacancy, Review
-from gym.constants import OPENAI_API_KEY
+from gym.constants import OPENAI_API_KEY, LessonChoice
+
 logger = logging.getLogger(__name__)
 
 # print('........lesson',lesson.subject_name, 'related to schedule',schedule.name)
 def test_view(request):
     return render(request=request, template_name='gym/LabWork1/test_page.html')
+def banners_view(request):
+    return render(request=request, template_name='gym/LabWork2/2banners.html')
+def scrolling_view(request):
+    return render(request=request, template_name='gym/LabWork2/3scrolling_animation.html')
+def volume_effect_view(request):
+    return render(request=request, template_name='gym/LabWork2/4volume_effect.html')
+def get_clients_data(request):
+    data_from_database = Client.objects.values('name', 'gender', 'age', 'card')  # Замените на свои поля
+    return JsonResponse(list(data_from_database), safe=False)
+def wonder_table_view(request):
+    return render(request=request, template_name='gym/LabWork2/9table.html')
+def prototype_example(request):
+    return render(request=request, template_name='gym/LabWork2/10class_prototype.html')
+def extends_view(request):
+    return render(request=request, template_name='gym/LabWork2/10class_extends.html')
+def array_view(request):
+    return render(request=request, template_name='gym/LabWork2/11array.html')
 def leave_review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -59,6 +77,18 @@ def main_news_view(request):
 def logout(request):
     #return render(request, template_name='gym/index.html', context={'mastername': None})
     return index(request=request)
+def get_statistics_dictionary():
+    dt = dict()
+    lessons = Lesson.objects.all()
+    for lesson in lessons:
+        lesson_students = 0  # people attending this lesson
+        schedules = lesson.schedule_set.all()  # all schedules which reference this lesson
+        for schedule in schedules:
+            group = schedule.group
+            group_clients = group.clients.all()#all clients of current_group
+            lesson_students += len(group_clients)
+        dt[lesson.get_subject_name()] = lesson_students*12
+    return dt
 def index(request, mastername=None):
     logger.warning('index_callded')
     masters = Master.objects.all()
@@ -108,7 +138,10 @@ def index(request, mastername=None):
     sum = 0
     for item in clients:
         sum += item.age
-    aver_age = sum/len(clients)
+    if len(clients) == 0:
+        aver_age = 0
+    else:
+        aver_age = sum/len(clients)
     context = {
         'mastername': mastername,
         'masters': masters,
@@ -119,7 +152,8 @@ def index(request, mastername=None):
         'max_students_count': max_students_count,
         'most_profitable_subject': most_profitable_subject,
         'max_weekly_profit': round(max_weekly_profit, 2),
-        'form': QuestionForm()
+        'form': QuestionForm(),
+        'statistics_dict': get_statistics_dictionary()
     }
     return render(request=request, template_name='gym/index.html',context=context)
 
@@ -189,18 +223,24 @@ def lesson_list(request):
     # Apply filters based on the provided parameters
     lessons = Lesson.objects.all()
     subject_name_choices = Lesson.objects.values_list('subject_name', flat=True).distinct()
+    full_name_choices = []
+    lesson_dict = dict(LessonChoice)
+    for item in subject_name_choices:
+        full_name_choices.append(lesson_dict[str(item)])
+
     if subject_name:
-        lessons = lessons.filter(subject_name=subject_name)
+        result_dict = {key: value for value, key in LessonChoice}
+        lessons = lessons.filter(subject_name=result_dict[subject_name])
     if lesson_price_higher:
         lessons = lessons.filter(lesson_price__gte=lesson_price_higher)
     if lesson_price_lower:
         lessons = lessons.filter(lesson_price__lte=lesson_price_lower)
-
     context = {
         'lessons': lessons,
-        'subject_name_choices': subject_name_choices,
+        'subject_name_choices': full_name_choices,
     }
     return render(request, 'gym/lesson_list.html', context)
+
 def master_list(request):
     masters = Master.objects.all()
     context = {

@@ -29,5 +29,13 @@ urlpatterns = [
     path('masters/', master_list, name='master_list'),
     path('cards/', cards_view, name='card_list'),
     path('master_lessons/<slug:username>/', lessons_for_current_master, name='master_lessons'),
-    path('test_page/', test_view, name='test_page')
+    path('test_page/', test_view, name='test_page'),
+    path('advertising_banners/', banners_view, name='rotating_banners'),
+    path('scrolling_animation/', scrolling_view, name='scrolling_animation'),
+    path('volume_effect/', volume_effect_view, name='volume_effect'),
+    path('get_clients_data/',get_clients_data, name='get_clients_data'),
+    path('wonder_table/',wonder_table_view,name='wonder_table'),
+    path('prototype_example/', prototype_example, name='prototype_example'),
+    path('extends_example', extends_view, name='extends_example'),
+    path('array',array_view, name='array')
 ]

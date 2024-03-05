@@ -1,17 +1,57 @@
 {% extends 'gym/base.html' %}
 {% block content %}
-<h2>ClubCards</h2>
-<table width="200"  border="1">
+<style>
+    .club-cards-table {
+    margin-left:40px;
+  width: 700px;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.club-cards-table th,
+.club-cards-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size:35px;
+}
+.club-cards-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+tr:nth-child(2) {
+  background-color: #B77529; /* Цвет фона для нечетных рядов */
+}
+tr:nth-child(3) {
+  background-color: #C3BDB6; /* Цвет фона для нечетных рядов */
+}
+tr:nth-child(4) {
+  background-color: #F3FF3D; /* Цвет фона для нечетных рядов */
+}
+tr:nth-child(5) {
+  background-color: #9EF8FF; /* Цвет фона для нечетных рядов */
+}
+/* Оформление для изображения */
+.card-image {
+  max-width: 200px;
+  height: auto;
+}
+caption{
+color: #4E0A58;
+font-size: 40px;
+}
+</style>
+<table class="club-cards-table">
+    <caption>ClubCard List</caption>
     <tr>
-        <td>Kind</td>
-        <td colspan="2">Discount</td>
-        <td>Images</td>
+        <th>Kind</th>
+        <th colspan="2">Discount</th>
+        <th>Images</th>
     </tr>
-    {% for card in cards%}
+    {% for card in cards %}
     <tr>
-        <td>{{card}}</td>
-        <td colspan="2">{{card.get_discount}}</td>
-        <td><img width="500" height="300" src="{{card.image.url}}"></td>
+        <td>{{ card.get_name }}</td>
+        <td colspan="2">{{ card.get_discount }}</td>
+        <td><img class="card-image" src="{{ card.image.url }}" alt="{{ card.kind }}"></td>
     </tr>
     {% endfor %}
 </table>

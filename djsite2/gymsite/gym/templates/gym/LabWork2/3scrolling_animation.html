@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-rPvwW1GQbXsR1xlUGqmeTN0cE09eFAWzW5X0i/pS4TkW4M4eCZiIidYo5G+RWh+axhXpxD4y0Ua/Bh8s0Z9u3g==" crossorigin="anonymous" />
+    <title>Scroll Animation</title>
+     <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', serif;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+}
+#top{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#top::before{
+    content:'';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height:200px;
+    width: 100%;
+    background:linear-gradient(to top,#fff,transparent);
+    z-index: 1000;
+}
+#man{
+    top: inherit;
+    bottom: 0;
+    width:800px;
+    height:950px;
+    margin-left: 35%;
+}
+section img{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+#text{
+    position: relative;
+    color:white;
+    font-size: 10rem;
+}
+#sec{
+    padding:100px;
+  padding-bottom:20px;
+}
+#sec h2{
+    font-size: 4rem;
+    margin-bottom: 30px;
+    color:#20496a;
+}
+#sec p{
+    font-size: 1.2rem;
+  line-height:2rem;
+  font-weight:300;
+    color:#20496a;
+}
+footer{
+  margin-top:30px;
+  display:flex;
+  padding:20px;
+  justify-content:space-evenly;
+  align-items:center;
+  background-color:#B0DFEA;
+}
+footer a{
+  color:#20496a;
+}
+footer a i{
+    transition:0.2s;
+}
+footer a:nth-of-type(3),footer a:nth-of-type(4), footer a:nth-of-type(5){
+font-size:1.3rem;}
+footer a i:hover{
+  transform:translateY(-10px);
+}
+</style>
+<script src="{% static 'gym/js/3scrolling_animation.js' %}" defer></script>
+</head>
+<body>
+ <section id="top">
+      <img src="{% static 'images/3champions/mountain.jpg' %}" id="bg" />
+      <h2 id="text">Champions</h2>
+      <img src="{% static 'images/3champions/magnus_carlsen.png'%}" id="man" />
+      <img src="{% static 'images/3scrolling_mountains/clouds_1.png' %}" id="clouds_1" />
+      <img src="{% static 'images/3scrolling_mountains/clouds_2.png' %}" id="clouds_2" />
+      <img src="{% static 'images/3scrolling_mountains/mountain_left.png' %}" id="mountain_left" />
+      <img src="{% static 'images/3scrolling_mountains/mountain_right.png' %}" id="mountain_right" />
+    </section>
+    <section id="sec">
+      <h2>Magnus Carlsen</h2>
+      <p>
+       To many, GM Magnus Carlsen is the best to ever play the game, although GMs Garry Kasparov and Bobby Fischer remain in the conversation. At any rate, the clear and remarkable point is that before turning 30 years old, Carlsen had already earned a spot at the top, and he has continued to dominate into his 30s.
+The 13-year-old Norwegian prodigy drew Kasparov and defeated GM Anatoly Karpov at the same event in 2004, one month before he became the second-youngest GM in history (and still eighth-youngest as of 2021). In 2009, he became the youngest player to break the 2800-rating threshold (a record only broken by GM Alireza Firouzja in 2021).
+Then Carlsen transitioned from young world-class player to all-time great. He captured the world number-one ranking in 2011 and still hasn’t let go of it as of May 2023. He won the world title in 2013 and has successfully defended it four times (2014, 2016, 2018, and 2021). Additionally, he has won multiple world titles in rapid and blitz time controls, achieved the highest rating ever, and racked up several elite tournament wins, including four Norway Chess victories and seven in Wijk aan Zee.
+The amazing part is it seems like there’s much more ahead for Carlsen. In October 2020 Carlsen's 125-game undefeated streak came to an end (he scored 42 wins and 83 draws during this streak), setting yet another world record. If he continues performing the way he has, Carlsen could create something truly legendary.
+      </p>
+    </section>
+<footer>
+  <a href=""><i class="fa-solid fa-house"></i></a>
+  <a href=""><i class="fa-solid fa-mountain-sun"></i></a>
+  <a href=""><i class="fa-solid fa-person-hiking"></i></a>
+  <a href=""><i class="fa-solid fa-people-group"></i></a>
+  <a href=""><i class="fa-solid fa-gears"></i></a>
+</footer>
+</body>
+</html>

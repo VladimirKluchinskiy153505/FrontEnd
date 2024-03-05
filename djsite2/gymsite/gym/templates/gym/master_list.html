@@ -1,8 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% extends 'gym/base.html' %}
+{% block content %}
+    <style>
+    .trainers-list {
+  display: flex; /* Включаем Flexbox */
+  flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку при нехватке места */
+  justify-content: space-between; /* Распределяет элементы между краями контейнера с равным пространством между ними */
+}
+
+.trainer {
+  flex: 0 0 calc(33.33% - 20px); /* Распределяет элементы на 33.33% ширины контейнера (с учетом 20px отступа между элементами) */
+  padding: 10px; /* Добавляет отступы вокруг каждого сотрудника */
+  border: 1px solid #ccc; /* Добавляет рамку вокруг каждого сотрудника */
+  margin-bottom: 20px; /* Добавляет расстояние между сотрудниками внизу */
+  box-sizing: border-box; /* Учитывает границы в расчете ширины элемента */
+  text-align: center; /* Выравнивание содержимого по центру */
+  background-color: #DDE485;
+}
+
+.trainer img {
+  max-width: 100%; /* Размер изображения в пределах родительского контейнера */
+  height: auto;
+}
+
+/* Дополнительные стили, которые можно настроить по вашему усмотрению */
+.trainer b {
+  font-weight: bold;
+}
+
+</style>
 </head>
 <body>
 <!--<h1>MasterDetails</h1>
@@ -20,19 +45,18 @@
     </tr>
     {% endfor %}
 </table>-->
-{% for master in masters %}
-<article>
-<b>Name: {{master.username}}</b><br>
-<b>Subject: {{master.subject_name}}</b><br>
-    <b>PhoneNumber: {{master.phone_number}}</b><br>
-<b>Email: {{master.email}}</b><br>
-    <b>Photo:</b><br>
-    {% if master.photo %}
-        <p><img class="img-article-left thumb" src="{{master.photo.url}}" style="width: 300px; height: 200px;"></p>
-    {% endif %}
-<b>Email: {{master.email}}</b>
-    </article><br>
-{% endfor %}
-
+<h1>Trainers List</h1>
+<div class="trainers-list">
+  {% for master in masters %}
+    <article class="trainer">
+      <b>Name: {{ master.username }}</b><br>
+      <b>Subject: {{ master.get_subject_name }}</b><br>
+      <b>Email: {{ master.email }}</b><br>
+      {% if master.photo %}
+        <p><img src="{{ master.photo.url }}" alt="{{ master.username }}"></p>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>
 </body>
-</html>
+{% endblock %}

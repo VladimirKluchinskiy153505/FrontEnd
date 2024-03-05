@@ -1,11 +1,36 @@
 {% extends 'gym/base.html' %}
 {% block content %}
-<h1>Список вакансий</h1>
-{% for vacancy in vacancy_list %}
-<ul>
-    <li>
-        <h2>{{vacancy.subject_name}}</h2>
-    </li>
-</ul>
-{% endfor %}
+<style>
+.vacancy-item {
+margin:20px;
+  width: 100%; /* Полная ширина контейнера */
+  overflow: hidden; /* Очистка float-ов */
+}
+.vacancy-image {
+  float: left;
+  margin-right: 10px;
+}
+.vacancy-image img {
+  width: 400px; /* Задайте желаемую ширину (например, 300 пикселей) */
+}
+.salary {
+  clear: both; /* Очищаем float после элемента с классом "salary" */
+  font-size:20px;
+}
+</style>
+<div class="vacancy-list">
+  <h1 align="center">Список вакансий</h1>
+    {% for vacancy in vacancy_list %}
+   <div class="vacancy-item">
+  <div class="vacancy-image">
+    <img src="{{ vacancy.image.url }}" alt="{{ vacancy.subject_name }}">
+  </div>
+  <div class="vacancy-details">
+    <h2>{{ vacancy.get_subject_name }}</h2>
+    <p>{{ vacancy.content }}</p>
+    <p class="salary">Зарплата: ${{ vacancy.salary }}</p>
+  </div>
+</div>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our best equipment</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,500;0,700;1,500;1,700&display=swap');
+:root {
+  font-family: 'Raleway', sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+div, div:before, div:after {
+  transform-style: preserve-3d;
+}
+body {
+  min-height: 100vh;
+
+  margin: 0;
+  background-color: #570303;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+  place-content: center;
+}
+.card-wrapper {
+  min-height: 45ch;
+  position: relative;
+  perspective: 500em;
+}
+
+.card:after {
+  content: '';
+  position: absolute;
+  inset: 2rem;
+  background-color: #faa;
+  opacity: 0.3;
+  transform: translatez(-10em);
+  border-radius: inherit;
+  filter: blur(3rem);
+}
+.card:before {
+  opacity: 0.5;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #f00;
+  mix-blend-mode: color;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.card-wrapper:nth-of-type(1) .card:before {
+  background-color: #0f0;
+}
+.card-wrapper:nth-of-type(2) .card:before {
+  background-color: #FF00E6;
+}
+.card-wrapper:nth-of-type(3) .card:before {
+  background-color: #F9751D;
+}
+.card-wrapper:nth-of-type(4) .card:before {
+  background-color: #FF0000;
+}
+.card {
+  --posx: 50%;
+  --posy: 50%;
+  --rotateX: 0;
+  --rotateY: 0;
+  position: absolute;
+  inset: 1rem;
+  border: 2px solid #fff2;
+  border-radius: 1em;
+  background-color: #FFFFFF;
+  transform:
+    perspective(100em)
+    translatez(0em)
+    rotateY(var(--rotateX))
+    rotateX(var(--rotateY));
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: var(--posx) var(--posy);
+}
+.card.card1 {
+  background-image: url({% static 'images/4cards/barbell.jpg' %});
+}
+.card.card2 {
+  background-image: url({% static 'images/4cards/dumbbell.jpg' %});
+}
+.card.card3 {
+  background-image: url({% static 'images/4cards/weight.jpg' %});
+}
+.card.card4 {
+  background-image: url({% static 'images/4cards/treadmill.jpg' %});
+}
+@keyframes reset-card{
+  to {
+    background-position: 50% 50%;
+    transform:
+      rotateY(0)
+      rotateX(0);
+  }
+}
+.card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+/* fluff */
+.card h2 {
+  margin: 0;
+  color: #000000;
+  padding-inline: 1rem;
+  padding-top: 1rem;
+  font-weight: 100;
+  font-size: 2.25rem;
+}
+.card .content {
+  //background-color: #0008;
+  padding-inline: 1rem;
+  color: #000000;
+  border-radius: inherit;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+    </style>
+    <script src="{% static 'gym/js/4volume_effect.js' %}" defer></script>
+</head>
+<body>
+<div class="card-wrapper">
+  <div class="card card1">
+    <h2>Barbell</h2>
+<!--    <div class="content">-->
+<!--      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In finibus, tellus</p>-->
+<!--    </div>-->
+  </div>
+</div>
+<div class="card-wrapper">
+  <div class="card card2">
+    <h2>Dumbbell</h2>
+<!--    <div class="content">-->
+<!--      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In finibus, tellus</p>-->
+<!--    </div>-->
+  </div>
+</div>
+<div class="card-wrapper">
+  <div class="card card3">
+    <h2>Weight</h2>
+<!--    <div class="content">-->
+<!--      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In finibus, tellus</p>-->
+<!--    </div>-->
+  </div>
+</div>
+<div class="card-wrapper">
+  <div class="card card4">
+    <h2>Treadmill</h2>
+<!--    <div class="content">-->
+<!--      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In finibus, tellus</p>-->
+<!--    </div>-->
+  </div>
+</div>
+</body>
+</html>

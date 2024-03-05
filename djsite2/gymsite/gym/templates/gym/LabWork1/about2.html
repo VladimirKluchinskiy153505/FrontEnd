@@ -1,9 +1,124 @@
 {% extends 'gym/base.html' %}
 {% load static %}
 {% block content %}
+<style>
+    .logo{
+    transform: rotate(45deg);
+    animation: rotateAndMove 5s linear infinite;
+    }
+    .certificate {
+         position:relative;
+        width: 700px;
+    height:900px;
+    padding:40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+  background-image:
+    linear-gradient(to bottom, rgba(229, 236, 34, 0.7), rgba(72, 46, 239, 0.7)),
+    url({% static 'images/NYcity.jpg' %});
+
+    border-image: url({% static 'images/stone_bound.jpg' %}) ;
+
+     border-image-slice: 50 ; /* Срез изображения (может потребоваться настроить) */
+  border-image-repeat: round; /* Повтор изображения по краям */
+    border-image-width: 20px;
+}
+
+h3 {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-family: 'Times New Roman', serif;
+  font-size: 32px;
+  color: #000;
+  margin: 20px 0;
+}
+
+p {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.signature {
+  margin-top: 40px;
+  position: relative;
+  left:0%;
+  top:30%;
+}
+
+.signature p {
+  font-family: 'Times New Roman', serif;
+  font-size: 20px;
+  color: #000;
+  margin: 5px 0;
+}
+.part1{
+    position:relative;
+    top:20%;
+}
+
+.signature p:first-child {
+  border-bottom: 2px solid #000; /* Горизонтальная линия */
+}
+
+.align-center {
+  text-align: center;
+}
+.requisites{
+margin:10px;
+background-image:
+    linear-gradient(to bottom, rgba(250, 6, 79, 0.7), rgba(17, 85, 222, 0.7));
+}
+.requisite {
+  font-size: 22px; /* Размер шрифта реквизитов */
+  color: #000; /* Цвет текста реквизитов */
+  margin-bottom: 5px; /* Отступ снизу */
+}
+dl {
+  border: 1px solid #ccc; /* Граница вокруг списка */
+  padding: 10px; /* Отступ внутри списка */
+  background-color: #D394E2; /* Фон списка */
+}
+
+dt {
+  font-weight: bold; /* Жирный шрифт для терминов */
+  margin-top: 10px; /* Отступ между терминами */
+  color: #F21515;
+}
+
+dd {
+  margin-bottom: 10px; /* Отступ между определениями */
+}
+
+     @keyframes rotateAndMove {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(90deg);
+        }
+        50% {
+            transform: rotate(180deg);
+        }
+        75% {
+            transform: rotate(270deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 <div class="container">
         <header><h2 align="center">About Company</h2></header>
-    <p><img src="/media/photos/logo/logo.jpeg" alt="Company Logo" style="width: 100px; height: 100px;">
+    <p><img src="/media/photos/logo/logo.jpeg" class="logo" alt="Company Logo" style="width: 100px; height: 100px;">
         Мы являемся лидерами в области чего-то там и предоставляем высококачественные услуги/продукты для наших клиентов. Наша миссия - удовлетворять потребности наших клиентов и превосходить их ожидания.</p>
 
         <h2 align="center">Наши услуги:</h2>
@@ -41,8 +156,6 @@
 <!--    type="application/x-shockwave-flash"-->
 <!--    width="560" height="349"-->
 <!--    allowfullscreen="true">-->
-
-
     <h2 align="center">Наша история</h2>
     <dl>
         <dt>Начало</dt>
@@ -94,9 +207,12 @@
             </li>
         </ol>
     </div>
-    <h3>Банковские реквизиты</h3>
-    <p>БеларусьБанк: 5470 8740 4198 5944</p>
-    <p>Bitcoin Wallet: if2jf02po3f3pok</p>
+    <div class="requisites">
+
+    <h3 class="requisites-heading">Банковские реквизиты</h3>
+    <p class="requisite">БеларусьБанк: 5470 8740 4198 5944</p>
+    <p class="requisite">Bitcoin Wallet: if2jf02po3f3pok</p>
+    </div>
     <br><br>
     <div class="certificate" align="center">
         <h3>Единый Реестр Фитнесс-клубов</h3>
@@ -104,10 +220,12 @@
         <p>
             Настоящим удостоверяется, что данный фитнесс-клуб является лучшим
         </p>
+        <div class="part1">
         <h2>Имя Получателя</h2>
         <p>
             успешно завершил(а) обучение и получил(а) сертификат за участие в курсе "Название Курса".
         </p>
+        </div>
         <div class="signature">
             <p>______________________________</p>
             <p>Подпись</p>

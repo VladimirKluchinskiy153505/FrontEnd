@@ -1,0 +1,36 @@
+footer {
+ text-align: center;
+}
+li {
+  padding: 10px;
+  background-color: #CAD4B1;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+li:hover {
+  background-color: #F67CA1;
+  cursor: pointer;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+.button {
+  display: inline-block;
+  padding:0px 0px;
+  background-color: #51133C;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 1px;
+}
+
+.button:hover {
+  background-color: #23527c;
+}
+.left-margin {
+            margin-left: 100px; /* Установите желаемый отступ (например, 20 пикселей) */
+}
+.middle{
+  text-align: center;
+}

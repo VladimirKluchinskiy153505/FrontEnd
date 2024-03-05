@@ -1,44 +1,139 @@
 {% extends 'gym/base.html' %}
 {% block content %}
+<style>
+    .rounded-block {
+    width: 100px; /* Задайте нужную ширину для круглых блоков */
+    height: 100px; /* Ширина и высота равны для создания круглых блоков */
+    background-color: #3498db; /* Задайте цвет фона */
+    border-radius: 50%; /* Устанавливаем радиус скругления, чтобы сделать блоки круглыми */
+    border: 2px solid #fff; /* Задайте тип границы и цвет */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Добавляем тень */
+    margin: 10px; /* Отступ между блоками */
+    display: inline-block; /* Размещаем блоки в строку */
+    text-align: center; /* Выравниваем текст по центру */
+    line-height: 100px; /* Выравниваем вертикально по центру (если есть текст) */
+    font-size: 16px; /* Размер шрифта текста в блоке */
+    color: #fff; /* Цвет текста */
+    font-weight: bold; /* Жирный текст (по желанию) */
+}
+
+/* Стиль для списка компаний партнеров */
+.partner-list {
+    text-align: center; /* Выравниваем центрально, если нужно */
+}
+
+/* Применяем стиль к блокам с классом .rounded-block */
+.partner-list .rounded-block {
+    /* Если вы хотите, чтобы каждый блок имел разные цвета, вы можете устанавливать их отдельно */
+    /*background-color: #ff5733;*/
+   /*background-color: #33ff57;*/
+    /* и так далее */
+}
+.company-name {
+    font-family: Arial, sans-serif; /* Задайте желаемый шрифт */
+    letter-spacing: 2px; /* Задайте значение кернинга (межсимвольного интервала) */
+}
+/* Стили для баннера */
+.banner {
+display: flex;
+  justify-content: center;
+    width: 1900px;
+    height: 900px;
+    background-color: #D211E8;
+    position: relative
+    text-align:center
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.banner-content {
+    position: absolute; /* Добавляем position: relative; */
+  top: 50%;
+  left: 30%;
+    text-align: center;
+}
+/* Стили для анимированного объекта */
+ .animated-object {
+        width: 640px;
+        height: 360px;
+        position: relative; /* Используем абсолютное позиционирование */
+    
+        animation: rotateAndMove 5s linear infinite;
+    }
+.item{
+  position: sticky;
+ top: 20px;
+ z-index: 2;
+}
+
+    @keyframes rotateAndMove {
+        0% {
+            transform: rotate(0deg) translate(0, 0);
+        }
+        25% {
+            transform: rotate(90deg) translate(100px, 0);
+        }
+        50% {
+            transform: rotate(180deg) translate(100px, 100px);
+        }
+        75% {
+            transform: rotate(270deg) translate(0, 100px);
+        }
+        100% {
+            transform: rotate(360deg) translate(0, 0);
+        }
+    }
+</style>
 <header><h2 align="center">Main Info</h2></header>
-<div align="justify">
+<div class="item" align="justify">
     <h3>Last Updated Article:</h3>
 <details>
     <summary>{{last_article.name}}</summary>
     <article>{{last_article.content }}</article>
 </details>
+</div>
+<!--<h3>Advertisement</h3>-->
+<!--<div class="banner" align="center">-->
+<!--    <div class="animated-object"><a href="https://store.epicgames.com/ru/" target="_blank" >-->
+<!--    <img src="/static/images/hogwarts_legacy.jpg" alt="Game Of The Year" width="640" height="360" title="Click to enlarge">-->
+<!--    </a></div>-->
+<!--</div>-->
+<h3 align="center">Advertisement</h3>
+<div class="banner">
+    <div class="banner-content">
+        <div class="animated-object">
+            <a href="https://store.epicgames.com/ru/" target="_blank">
+                <img src="/static/images/hogwarts_legacy.jpg" alt="Game Of The Year" width="640" height="360" title="Click to enlarge">
+            </a>
+        </div>
     </div>
-<div align="center">
-    <h3>Advertisement</h3>
-    <a href="https://store.epicgames.com/ru/" target="_blank" >
-    <img src="/static/images/hogwarts_legacy.jpg" alt="Game Of The Year" width="640" height="360" title="Click to enlarge">
-    </a>
+
 </div>
 <div align="center">
     <h3>Partners:</h3>
-    <ol>
-        <li >
+    <ol class="partner-list">
+        <li class="rounded-block">
             <a href="https://www.nvidia.com/ru-ru/" target="_blank">
-                <img src="/static/images/logos/nvidia.jpg" align="left" width="100" height="50" alt="nvidia">
-                <p>Nvidia</p>
+                <img src="/static/images/logos/nvidia.jpg" align="center" width="100" height="50" alt="nvidia">
+                <p class="company-name">Nvidia</p>
             </a>
         </li>
-        <li >
+        <li class="rounded-block">
             <a href="https://www.amd.com/en.html" target="_blank">
-                <img src="/static/images/logos/amd.jpg" align="left" width="100" height="50" alt="nvidia">
-                <p>AMD</p>
+                <img src="/static/images/logos/amd.jpg" align="center" width="100" height="50" alt="nvidia">
+                <p class="company-name">AMD</p>
             </a>
         </li>
-        <li >
+        <li class="rounded-block">
             <a href="https://www.asus.com/ru/" target="_blank">
-                <img src="/static/images/logos/asus.png" align="left" width="100" height="50" alt="nvidia">
-                <p>ASUS</p>
+                <img src="/static/images/logos/asus.png" align="center" width="100" height="50" alt="nvidia">
+                <p class="company-name">ASUS</p>
             </a>
         </li>
-        <li >
+        <li class="rounded-block">
             <a href="https://www.gigabyte.com/" target="_blank">
-                <img src="/static/images/logos/gigabyte.jpg" align="left" width="100" height="50" alt="nvidia">
-                <p>Gigabyte</p>
+                <img src="/static/images/logos/gigabyte.jpg" align="center" width="100" height="50" alt="nvidia">
+                <p class="company-name">Gigabyte</p>
             </a>
         </li>
     </ol>

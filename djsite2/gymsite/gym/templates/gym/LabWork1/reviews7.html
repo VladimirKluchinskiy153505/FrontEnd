@@ -1,13 +1,52 @@
 {% extends 'gym/base.html' %}
 {% block content %}
-<h1>review_list</h1>
+<style>
+  h1.review_list {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    color: #333;
+    text-decoration: underline;
+  }
+  .review {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .score {
+    font-weight: bold;
+    font-size: 25px;
+    color: #ff6600; /* Оранжевый цвет для оценки */
+  }
+  .timestamp {
+    font-style: italic;
+    color: #4E1507;
+  }
+  .review:hover {
+    background-color: #E4846D; /* Изменение цвета фона при наведении */
+  }
+p{
+font-family: Arial, sans-serif;
+font-size: 16px;
+font-weight: bold;
+font-style: italic;
+color: #333;
+line-height: 1.5;
+text-decoration: underline;
+}
+  /* Псевдокласс для оценки при наведении */
+  .score:hover {
+    color: #13056E; /* Изменение цвета оценки при наведении */
+  }
+</style>
+<h1 class="Reviews">Отзывы</h1>
 {% for review in review_list %}
 <div class="review">
-            <b>Name: {{ review.name }}</b>
-            <p>Оценка: <span class="score">{{ review.score }}</span></p>
-            <p>Отзыв: {{ review.text }}</p>
-            <p>Дата: {{ review.timestamp|date:"F d, Y H:i" }}</p>
-        </div>
+  <b>Name: {{ review.get_name }}</b>
+  <p>Оценка: <span class="score">{{ review.score }}</span></p>
+  <p>Отзыв: {{ review.content }}</p>
+  <p class="timestamp">Дата: {{ review.timestamp|date:"F d, Y H:i" }}</p>
+</div>
 <hr>
 {% endfor %}
 {% endblock %}

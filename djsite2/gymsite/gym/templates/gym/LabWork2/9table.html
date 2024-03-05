@@ -1,0 +1,45 @@
+{% extends 'gym/base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+         table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+         table, th, td {
+            margin: 20px;
+            border: 1px solid #440000;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+        td {
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        td.highlight-even {
+            background-color: #58E667;
+        }
+
+        td.highlight-odd {
+            background-color: #F96D57;
+        }
+    </style>
+<script src="{% static 'gym/js/9table.js' %}" defer></script>
+<input type="number" id="tableSize" placeholder="Размер таблицы">
+<button onclick="generateTable()">Создать таблицу</button>
+<button id="transposeButton">Транспонировать</button>
+<button onclick="addRow()">Добавить ряд</button>
+<button onclick="addColumn()">Добавить колонку</button>
+<input type="number" id="limitInput"  value="8">
+<br>
+
+<table id="generatedTable"></table>
+{% endblock %}

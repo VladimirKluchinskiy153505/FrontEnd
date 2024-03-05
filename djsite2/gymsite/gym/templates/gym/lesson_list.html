@@ -6,7 +6,7 @@
         <select name="subject_name" id="subject_name">
             <option value="">All</option>
             {% for choice in subject_name_choices %}
-                <option value="{{ choice }}">{{ choice }}</option>
+                <option value="{{ choice }}">{{ choice}}</option>
             {% endfor %}
         </select>
 
@@ -48,6 +48,4 @@
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
 {% endblock %}

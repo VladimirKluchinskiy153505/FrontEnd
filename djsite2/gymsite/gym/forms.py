@@ -7,7 +7,7 @@ from gym.models import LessonChoice, Master, Question, Review
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['name', 'score', 'text']
+        fields = ['name', 'score', 'content']
 
 class RegistrationForm(forms.ModelForm):
     username = forms.CharField(max_length=100)
@@ -46,15 +46,17 @@ class RegistrationForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
-
 class QuestionForm(forms.ModelForm):
     name = forms.CharField(label="Your Name", max_length=50)
     email = forms.CharField(label="Your Email", max_length=50)
-    #timespan = forms.DateTimeField()
-    question = forms.CharField(label="Your Question", widget=forms.Textarea)
     class Meta:
         model = Question
         fields = ['name', 'email', 'question']
 
+    def clean_question(self):
+        question = self.cleaned_data.get('question')
+        if len(question) > 500:
+            raise forms.ValidationError('Question is over 500 symbols')
+        return question
 
 

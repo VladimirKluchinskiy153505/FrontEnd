@@ -1,0 +1,25 @@
+{% extends 'gym/base.html' %}
+{% load static %}
+{% block content %}
+<script src="{% static 'gym/js/11array.js' %}" defer></script>
+<form id="baggageForm">
+    <label for="passengerName">Фамилия пассажира:</label>
+    <input type="text" id="passengerName" required>
+
+    <label for="itemsCount">Количество вещей в багаже:</label>
+    <input type="number" id="itemsCount" required>
+
+    <label for="totalWeight">Общий вес вещей:</label>
+    <input type="number" id="totalWeight" step="0.1" required>
+
+    <button type="button" onclick="addPassenger()">Добавить пассажира</button>
+<br><br>
+    <label for="removePassengerName">Фамилия пассажира для удаления:</label>
+    <input type="text" id="removePassengerName">
+    <button type="button" onclick="removePassenger()">Удалить пассажира</button>
+
+    <button type="button" onclick="findAverageWeightDifference()">Найти пассажира</button>
+</form>
+
+<div id="result"></div>
+{% endblock %}

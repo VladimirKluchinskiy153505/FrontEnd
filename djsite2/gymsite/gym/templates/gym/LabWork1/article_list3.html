@@ -1,5 +1,30 @@
 {% extends 'gym/base.html' %}
 {% block content %}
+<style>
+    .content{
+    height:300px;
+    overflow:scroll;
+    }
+   .text {
+  width: 200px; /* Ширина выделенной области */
+  height: 30px; /* Высота выделенной области */
+  overflow: hidden; /* Скрываем лишнее содержимое */
+  white-space: nowrap; /* Запрещаем перенос текста по строкам */
+    text-overflow: ellipsis; /* Добавляем многоточие, если текст не помещается */
+  overflow: hidden; /* Скрываем любое содержимое, которое может выйти за пределы контейнера */
+}
+.article {
+  column-count: 2; /* Количество колонок */
+  column-gap: 20px; /* Отступ между колонками */
+  column-rule: 1px solid #ccc; /* Граница между колонками */
+  padding: 20px; /* Отступ внутри элемента */
+}
+summary::first-letter {
+    font-size: 24px; /* Размер первой буквы */
+    font-weight: bold; /* Жирный шрифт для первой буквы */
+    color: #007BFF; /* Цвет первой буквы */
+}
+</style>
 <h1 align="center">Articles:</h1>
 <hr>
 {% for article in article_list %}
@@ -8,8 +33,8 @@
 
   <b>{{ article.timestamp|date:"F d, Y H:i" }}</b>
     <details>
-        <summary>{{article.get_first_sentence}}</summary>
-        <p>{{article.content}}</p>
+    <summary class="text">{{article.get_first_sentence}}</summary>
+        <p class="content article">{{article.content}}</p>
     </details>
     <hr>
 </article>

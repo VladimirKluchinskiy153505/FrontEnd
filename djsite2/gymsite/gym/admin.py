@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import *
-
 class GroupAdmin(admin.ModelAdmin):
     list_display =('name', 'period_price', 'schedule')
     list_display_links = ('name',)
@@ -64,13 +63,16 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'timestamp')
 
 class VacancyAdmin(admin.ModelAdmin):
-    list_display = ('subject_name',)
-    list_display_links = ('subject_name',)
+    list_display = ('subject_name', 'content', 'salary')
+    list_display_links = ('subject_name', 'content', 'salary')
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('name', 'score', 'text')
+    list_display = ('name', 'score', 'content')
     list_display_links = ('name',)
 
+# class BannerAdmin(admin.ModelAdmin):
+#     list_display = ('rotation_interval',)
+# admin.site.register(Banner,BannerAdmin)
 admin.site.register(Review, ReviewAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
 admin.site.register(Question, QuestionAdmin)
